@@ -15,6 +15,8 @@
 		$scope.orders = [];
 		$scope.enableSend = false;
 		var count = 0;
+		
+		$scope.phonePattern= /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
 
 		$scope.addItems = function() {
 			var orderQuantity = $scope.orderQuantity;
@@ -43,6 +45,10 @@
 			if($scope.orders.length==0)
 				$scope.enableSend = false;
 		}
+		
+		$scope.submitOrder = function() {
+			$scope.success=true;
+		}
 	});
 </script>
 
@@ -52,22 +58,28 @@
 
 
 	<div class="container">
-		<div class="well well-sm">
+ 		<div class="well well-sm">
 			<div class="container-fluid">
 				<div class="well well-sm">
-					<img class="img-rounded" width="60%" height="100em"
-						alt="Curry Bowl" src="images/online-order.png"> 
-					<button class="btn btn-primary"><span class="badge">rv</span></button> 
+							<h1>Online Order Management - <label class="label label-primary">@rv</label></h1>
 				</div>
 			</div>
-
-			<h3>Place Your Orders Now</h3>
-
+			
+				 
+<!-- 		<img class="img-rounded" width="60%" height="100em"
+						alt="Online Order" src="images/online-order.png"> 	<label class="label label-primary">@rv</label>
+ -->			
 			<form class="form-horizontal" name="myForm">
 
-				<div class="alert alert-success">
-					<div class="success-message">Order Request has been placed,
-						please wait for confirmation email</div>
+				<div class="alert alert-success" ng-show="success">
+					<div class="success-message">Order Request has been placed successfully
+						</div>
+						<div ng-repeat="order in orders">
+									<span ng-show="order.orderQuantity>0">
+										<label for='input{{order.id}}'>{{order.orderItem}} :
+											{{order.orderQuantity}}</label>
+									</span>
+								</div>
 				</div>
 				<br />
 
@@ -120,54 +132,38 @@
 								<label for="phone">Phone:</label>
 							</div>
 							<div class="col-lg-4">
-								<input type="text" name="phone" class="form-control input-sm"
+								<input type="text" name="phone" ng-pattern="/^[\]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/" required 
+								class="form-control input-sm"
 									ng-model="phone" ng-required="true" placeholder="Phone" /> <span
 									style="color: red"
 									ng-show="myForm.phone.$touched && myForm.phone.$invalid">
 									<span ng-show="myForm.phone.$error.required">Phone is
 										Required</span>
+									<span ng-show="myForm.phone.$error.pattern">Phone Number
+										Invalid</span>
 								</span>
 							</div>
 						</div>
 					</div>
 				</div>
 
+
+
 				<div class="container-fluid">
 					<div class="form-group">
 						<div class="row">
 							<div class="col-lg-2">
-								<label for="order-location">Office Location:</label>
+								<label for="order-Item">Order:</label>
 							</div>
 							<div class="col-lg-4">
-								<select ng-model="orderLocation" name="order-location"
-									ng-required="true" id="order-location">
-									<option value="">Please select Your office</option>
-									<option value="Calpers">CalPERS</option>
-									<option value="Calstrs">CalSTRS</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="container-fluid">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-lg-2">
-								<label for="order-location">Order:</label>
-							</div>
-							<div class="col-lg-4">
-								<select ng-model="orderItem" ng-required="true"
+								<select name="order-Item" ng-model="orderItem" ng-required="true"
 									name="order-item" id="order-item">
 									<option value="">Please selct Your Order</option>
-									<option value="Veg Biryani">Veg Biryani $7</option>
-									<option value="Chicken Dum Biryani">Chicken Dum
-										Biryani $8</option>
-									<option value="Spl Chicken Biryani">Spl Chicken
-										Biryani $9</option>
-									<option value="Veg Noodles with Gobi Mancuria Combo">Veg
-										Noodles with Gobi Mancuria Combo $8</option>
-									<option value="Veg Noodles with Chilli Chicken Combo">Veg
-										Noodles with Chilli Chicken Combo $8</option>
+									<option value="Ferrari">Ferrari</option>
+									<option value="Lamborghini">Lamborghini</option>
+									<option value="Ferrari">Aston Martin</option>
+									<option value="Lamborghini">Bentley</option>
+									<option value="Ferrari">Jaguar</option>
 								</select>
 							</div>
 						</div>
@@ -179,10 +175,10 @@
 					<div class="form-group">
 						<div class="row">
 							<div class="col-lg-2">
-								<label for="order-location">Order:</label>
+								<label for="order-Quantity">Order:</label>
 							</div>
 							<div class="col-lg-4">
-								<select ng-model="orderQuantity" ng-required="true"
+								<select name="order-Quantity" ng-model="orderQuantity" ng-required="true"
 									name="order-quantity" id="order-quantity">
 									<option value="">Please select Quantity</option>
 									<option value="1">1</option>
@@ -195,6 +191,13 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="container="fluid">
+					<img class="img-rounded" ng-hide="!orderItem || !orderItem.length" width="350em" height="200em"
+						alt="please select a car for preview" src='images/{{orderItem}}.jpg' />
+				
+				</div>
+				
 				<div class="container-fluid">
 					<div class="form-group">
 						<div class="row">
@@ -205,14 +208,14 @@
 								<div ng-repeat="order in orders">
 									<span ng-show="order.orderQuantity>0"> <input
 										id='input{{order.id}}' type="checkbox" ng-model="order.remove">
-										<label for='input{{order.id}}'>{{order.orderItem}} -
+										<label for='input{{order.id}}'>{{order.orderItem}} :
 											{{order.orderQuantity}}</label>
 									</span>
 								</div>
 
 								<br /> <br />
 
-								<button ng-click="removeItems(order)"
+								<button ng-click="removeItems()"
 									class="btn btn-sm btn-danger">Remove</button>
 								<button ng-click="addItems()" ng-disabled="myForm.$invalid"
 									class="btn btn-sm btn-info">Add</button>
@@ -221,14 +224,17 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				
 
 				<input name="orders" type="textArea" ng-hide="true"
 					value='{{orders}}'>
 
 				<div class="clear"></div>
-				<a href="#" type="button" class="btn btn-default">Clear</a> <a
-					href="#" type="submit" class="btn btn-primary"
-					ng-disabled="myForm.$invalid || !enableSend">Send</a>
+				<a href="#" type="button" class="btn btn-default">Clear</a> 
+				<button ng-click="submitOrder()" class="btn btn-primary"
+					ng-disabled="myForm.$invalid || !enableSend">Submit</button>
 
 			</form>
 		</div>
