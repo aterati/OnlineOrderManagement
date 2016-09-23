@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Online Order Management System</title>
+<meta charset="utf-8">
+<script
+	src="js/angular.min.js"></script>
+<script
+	src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"></link>
+
+<script>
+	var app = angular.module("myApp", []);
+	app.controller("myCtrl", function($scope) {
+		$scope.orders = [];
+		$scope.enableSend = false;
+		var count = 0;
+
+		$scope.addItems = function() {
+			var orderQuantity = $scope.orderQuantity;
+			var orderItem = $scope.orderItem;
+			count++;
+			
+			$scope.orders.push({
+				id : count,
+				orderItem : orderItem,
+				orderQuantity : orderQuantity,
+				remove : false
+			});
+			$scope.enableSend = true;
+		}
+
+		$scope.removeItems = function() {
+			var oldOrders = $scope.orders;
+			$scope.orders = [];
+
+			angular.forEach(oldOrders, function(order) {
+				if (!order.remove)
+					$scope.orders.push(order);
+
+			});
+			
+			if($scope.orders.length==0)
+				$scope.enableSend = false;
+		}
+	});
+</script>
+
+
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+
+	<div class="container">
+		<div class="well well-sm">
+			<div class="container-fluid">
+				<div class="well well-sm">
+					<img class="img-rounded" width="60%" height="100em"
+						alt="Curry Bowl" src="images/online-order.png"> 
+					<button class="btn btn-primary"><span class="badge">rv</span></button> 
+				</div>
+			</div>
+
+			<h3>Place Your Orders Now</h3>
+
+			<form class="form-horizontal" name="myForm">
+
+				<div class="alert alert-success">
+					<div class="success-message">Order Request has been placed,
+						please wait for confirmation email</div>
+				</div>
+				<br />
+
+				<div class="container-fluid">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-2">
+								<label for="name">Name:</label>
+							</div>
+
+							<div class="col-lg-4">
+								<input type="text" name="name" class="form-control input-sm"
+									ng-model="name" ng-required="true" placeholder="Name" /> <span
+									style="color: red"
+									ng-show="myForm.name.$touched && myForm.name.$invalid">
+									<span ng-show="myForm.name.$error.required">Name is
+										Required</span>
+
+								</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="container-fluid">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-2">
+								<label for="email">Email:</label>
+							</div>
+							<div class="col-lg-4">
+								<input type="email" name="email" class="form-control input-sm"
+									ng-model="email" ng-required="true" placeholder="Email" /> <span
+									style="color: red"
+									ng-show="myForm.email.$touched && myForm.email.$invalid">
+									<span ng-show="myForm.email.$error.required">Email is
+										Required</span> <span ng-show="myForm.email.$error.email">Invalid
+										Email</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="container-fluid">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-2">
+								<label for="phone">Phone:</label>
+							</div>
+							<div class="col-lg-4">
+								<input type="text" name="phone" class="form-control input-sm"
+									ng-model="phone" ng-required="true" placeholder="Phone" /> <span
+									style="color: red"
+									ng-show="myForm.phone.$touched && myForm.phone.$invalid">
+									<span ng-show="myForm.phone.$error.required">Phone is
+										Required</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="container-fluid">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-2">
+								<label for="order-location">Office Location:</label>
+							</div>
+							<div class="col-lg-4">
+								<select ng-model="orderLocation" name="order-location"
+									ng-required="true" id="order-location">
+									<option value="">Please select Your office</option>
+									<option value="Calpers">CalPERS</option>
+									<option value="Calstrs">CalSTRS</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container-fluid">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-2">
+								<label for="order-location">Order:</label>
+							</div>
+							<div class="col-lg-4">
+								<select ng-model="orderItem" ng-required="true"
+									name="order-item" id="order-item">
+									<option value="">Please selct Your Order</option>
+									<option value="Veg Biryani">Veg Biryani $7</option>
+									<option value="Chicken Dum Biryani">Chicken Dum
+										Biryani $8</option>
+									<option value="Spl Chicken Biryani">Spl Chicken
+										Biryani $9</option>
+									<option value="Veg Noodles with Gobi Mancuria Combo">Veg
+										Noodles with Gobi Mancuria Combo $8</option>
+									<option value="Veg Noodles with Chilli Chicken Combo">Veg
+										Noodles with Chilli Chicken Combo $8</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="container-fluid">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-2">
+								<label for="order-location">Order:</label>
+							</div>
+							<div class="col-lg-4">
+								<select ng-model="orderQuantity" ng-required="true"
+									name="order-quantity" id="order-quantity">
+									<option value="">Please select Quantity</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container-fluid">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-2">
+								<label for="order-location">Order Details:</label>
+							</div>
+							<div class="col-lg-4">
+								<div ng-repeat="order in orders">
+									<span ng-show="order.orderQuantity>0"> <input
+										id='input{{order.id}}' type="checkbox" ng-model="order.remove">
+										<label for='input{{order.id}}'>{{order.orderItem}} -
+											{{order.orderQuantity}}</label>
+									</span>
+								</div>
+
+								<br /> <br />
+
+								<button ng-click="removeItems(order)"
+									class="btn btn-sm btn-danger">Remove</button>
+								<button ng-click="addItems()" ng-disabled="myForm.$invalid"
+									class="btn btn-sm btn-info">Add</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<input name="orders" type="textArea" ng-hide="true"
+					value='{{orders}}'>
+
+				<div class="clear"></div>
+				<a href="#" type="button" class="btn btn-default">Clear</a> <a
+					href="#" type="submit" class="btn btn-primary"
+					ng-disabled="myForm.$invalid || !enableSend">Send</a>
+
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
