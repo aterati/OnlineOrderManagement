@@ -16,6 +16,7 @@ var app = angular.module("myApp", []);
 			
 			if($scope.isOrderSubmitted)
 			{
+				$scope.success = false;
 				$scope.orders = [];
 			}
 
