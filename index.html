@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 	<title>Online Order Management System</title>
-	<meta charset="utf-8">
+	<meta name="description" content="This is a simple page Online Order Management System designed using AngularJS. 
+	This application let's the user make a selection of the order item, quantity required and submit an order.">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<script src="js/angular.min.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/app.js"></script>
@@ -16,9 +20,9 @@
 	<div class="container">
 	
 	<div class="well well-sm" style="background-color: #337ab7; color: #fff;">
-					<h2>
+					<h3>
 						Online Order Management  <label class="label label-primary" style="float:right">- @rv</label>
-					</h2>
+					</h3>
 				</div>
 	
 		<div class="panel panel-primary" style="background-color:#ffffff !important">
@@ -47,11 +51,11 @@
 				<div class="container-fluid">
 					<div class="form-group">
 						<div class="row">
-							<div class="col-lg-2">
+							<div class="col-md-2 col-xs-4">
 								<label for="name">Name:</label>
 							</div>
 
-							<div class="col-lg-4">
+							<div class="col-md-4 col-xs-6">
 								<input type="text" name="name" class="form-control input-sm"
 									ng-model="name" ng-required="true" placeholder="Name" /> <span
 									style="color: red"
@@ -69,10 +73,10 @@
 				<div class="container-fluid">
 					<div class="form-group">
 						<div class="row">
-							<div class="col-lg-2">
+							<div class="col-md-2 col-xs-4">
 								<label for="email">Email:</label>
 							</div>
-							<div class="col-lg-4">
+							<div class="col-md-4 col-xs-6">
 								<input type="email" name="email" class="form-control input-sm"
 									ng-model="email" ng-required="true" placeholder="Email" /> <span
 									style="color: red"
@@ -89,10 +93,10 @@
 				<div class="container-fluid">
 					<div class="form-group">
 						<div class="row">
-							<div class="col-lg-2">
+							<div class="col-md-2 col-xs-4">
 								<label for="phone">Phone:</label>
 							</div>
-							<div class="col-lg-4">
+							<div class="col-md-4 col-xs-6">
 								<input type="text" name="phone"
 									ng-pattern="/^[\]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/"
 									required class="form-control input-sm" ng-model="phone"
@@ -113,10 +117,10 @@
 				<div class="container-fluid">
 					<div class="form-group">
 						<div class="row">
-							<div class="col-lg-2">
+							<div class="col-md-2 col-xs-4">
 								<label for="orderItem">Order:</label>
 							</div>
-							<div class="col-lg-4">
+							<div class="col-md-4 col-xs-6">
 								<select name="orderItem" ng-model="orderItem" ng-required="true"
 									id="orderItem">
 									<option value="">Please selct Your Order</option>
@@ -131,7 +135,7 @@
 					</div>
 				</div>
 
-				<div class="container="fluid">
+				<div class="container-fluid">
 					<img class="img-rounded" ng-hide="!orderItem || !orderItem.length"
 						width="350em" height="200em" alt="please select a car for preview"
 						src='images/{{orderItem}}.png' />
@@ -141,16 +145,16 @@
 				<div class="container-fluid">
 					<div class="form-group">
 						<div class="row">
-							<div class="col-lg-2">
+							<div class="col-md-2 col-xs-4">
 								<label for="order-location">Order Details:</label>
 							</div>
 
-							<div class="col-lg-4">
+							<div class="col-md-4 col-xs-8">
 								<div ng-repeat="order in orders">
 									<span ng-show="!order.orderItem || !order.length"> 
 									<!-- <input
 										id='input{{order.id}}' type="checkbox" ng-model="order.remove"> -->
-										<label style="width:30%">{{order.orderItem}} : </label>
+										<label style="width:40%">{{order.orderItem}} : </label>
 										<select name="orderQuantity" ng-model="order.orderQuantity"
 										ng-required="true" id="orderQuantity">
 											<option ng-selected="1" value="1">1</option>
