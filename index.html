@@ -1,198 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Online Order Management System</title>
-	<meta name="description" content="This is a simple page Online Order Management System designed using AngularJS. 
+<title>Online Order Management System</title>
+<meta name="description"
+	content="This is a simple page Online Order Management System designed using AngularJS. 
 	This application let's the user make a selection of the order item, quantity required and submit an order.">
-	<meta name="viewport" content="width=device-width; initial-scale=1.0">
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<script src="js/angular.min.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/app.js"></script>
-	<link rel="stylesheet" href="css/bootstrap.min.css"></link>
-	<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css"></link>
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="js/angular.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/app.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css"></link>
 </head>
 
 <body ng-app="myApp" ng-controller="myCtrl" style="padding-top: 1em">
 
 
 	<div class="container">
-	
-	<div class="well well-sm" style="background-color: #337ab7; color: #fff;">
-					<h3>
-						Online Order Management  <label class="label label-primary" style="float:right">- @rv</label>
-					</h3>
-				</div>
-	
-		<div class="panel panel-primary" style="background-color:#ffffff !important">
-	
+
+		<div class="well well-sm"
+			style="background-color: #337ab7; color: #fff;">
+			<h3>
+				Online Order Management <label class="label label-primary"
+					style="float: right">- @rv</label>
+			</h3>
+		</div>
+
+		<div class="panel panel-primary"
+			style="background-color: #ffffff !important">
+
 			<!-- <div class="panel-heading">
 			Online Order Management</div>
      -->
-				
-				
 
-		<div class="panel-body">
-			<form class="form-horizontal" name="myForm">
 
-				<div class="alert alert-success" ng-show="success">
-					<div class="success-message">Order Request has been placed
-						successfully</div>
-					<div ng-repeat="order in orders">
-						<span ng-show="order.orderQuantity>0"> 
-						<label>{{order.orderItem}} :
-								{{order.orderQuantity}}</label>
-						</span>
-					</div>
-				</div>
-				<br />
 
-				<div class="container-fluid">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-2 col-xs-4">
-								<label for="name">Name:</label>
-							</div>
+			<div class="panel-body">
+				<form class="form-horizontal" name="myForm">
 
-							<div class="col-md-4 col-xs-6">
-								<input type="text" name="name" class="form-control input-sm"
-									ng-model="name" ng-required="true" placeholder="Name" /> <span
-									style="color: red"
-									ng-show="myForm.name.$touched && myForm.name.$invalid">
-									<span ng-show="myForm.name.$error.required">Name is
-										Required</span>
-
-								</span>
-							</div>
-
+					<div class="alert alert-success" ng-show="success">
+						<div class="success-message">Order Request has been placed
+							successfully</div>
+						<div ng-repeat="order in orders">
+							<span ng-show="order.orderQuantity>0"> <label>{{order.orderItem}}
+									: {{order.orderQuantity}}</label>
+							</span>
 						</div>
 					</div>
-				</div>
+					<br />
 
-				<div class="container-fluid">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-2 col-xs-4">
-								<label for="email">Email:</label>
-							</div>
-							<div class="col-md-4 col-xs-6">
-								<input type="email" name="email" class="form-control input-sm"
-									ng-model="email" ng-required="true" placeholder="Email" /> <span
-									style="color: red"
-									ng-show="myForm.email.$touched && myForm.email.$invalid">
-									<span ng-show="myForm.email.$error.required">Email is
-										Required</span> <span ng-show="myForm.email.$error.email">Invalid
-										Email</span>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
+					<div class="container-fluid">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-2 col-xs-4">
+									<label for="name">Name:</label>
+								</div>
 
-				<div class="container-fluid">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-2 col-xs-4">
-								<label for="phone">Phone:</label>
-							</div>
-							<div class="col-md-4 col-xs-6">
-								<input type="text" name="phone"
-									ng-pattern="/^[\]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/"
-									required class="form-control input-sm" ng-model="phone"
-									ng-required="true" placeholder="Phone" /> <span
-									style="color: red"
-									ng-show="myForm.phone.$touched && myForm.phone.$invalid">
-									<span ng-show="myForm.phone.$error.required">Phone is
-										Required</span> <span ng-show="myForm.phone.$error.pattern">Phone
-										Number Invalid</span>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
+								<div class="col-md-4 col-xs-6">
+									<input type="text" name="name" class="form-control input-sm"
+										ng-model="name" ng-required="true" placeholder="Name" /> <span
+										style="color: red"
+										ng-show="myForm.name.$touched && myForm.name.$invalid">
+										<span ng-show="myForm.name.$error.required">Name is
+											Required</span>
 
-
-
-				<div class="container-fluid">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-2 col-xs-4">
-								<label for="orderItem">Order:</label>
-							</div>
-							<div class="col-md-4 col-xs-6">
-								<select name="orderItem" ng-model="orderItem" ng-required="true"
-									id="orderItem">
-									<option value="">Please selct Your Order</option>
-									<option value="Ferrari">Ferrari</option>
-									<option value="Lamborghini">Lamborghini</option>
-									<option value="Maserati">Maserati</option>
-									<option value="Jaguar">Jaguar</option>
-									<option value="Porsche">Porsche</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="container-fluid">
-					<img class="img-rounded" ng-hide="!orderItem || !orderItem.length"
-						width="350em" height="200em" alt="please select a car for preview"
-						src='images/{{orderItem}}.png' />
-
-				</div>
-
-				<div class="container-fluid">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-2 col-xs-4">
-								<label for="order-location">Order Details:</label>
-							</div>
-
-							<div class="col-md-4 col-xs-8">
-								<div ng-repeat="order in orders">
-									<span ng-show="!order.orderItem || !order.length"> 
-									<!-- <input
-										id='input{{order.id}}' type="checkbox" ng-model="order.remove"> -->
-										<label style="width:40%">{{order.orderItem}} : </label>
-										<select name="orderQuantity" ng-model="order.orderQuantity"
-										ng-required="true" id="orderQuantity">
-											<option ng-selected="1" value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-									</select>
-										<a href="#" ng-click="removeItems(order.id)" style="color:red"><span class="fa fa-times"></span></a>
 									</span>
 								</div>
-								<br /> <br />
-
-								
-								<button ng-click="addItems()" ng-disabled="myForm.$invalid"
-									class="btn btn-sm btn-info">Add</button>
 
 							</div>
 						</div>
 					</div>
-				</div>
+
+					<div class="container-fluid">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-2 col-xs-4">
+									<label for="email">Email:</label>
+								</div>
+								<div class="col-md-4 col-xs-6">
+									<input type="email" name="email" class="form-control input-sm"
+										ng-model="email" ng-required="true" placeholder="Email" /> <span
+										style="color: red"
+										ng-show="myForm.email.$touched && myForm.email.$invalid">
+										<span ng-show="myForm.email.$error.required">Email is
+											Required</span> <span ng-show="myForm.email.$error.email">Invalid
+											Email</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="container-fluid">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-2 col-xs-4">
+									<label for="phone">Phone:</label>
+								</div>
+								<div class="col-md-4 col-xs-6">
+									<input type="text" name="phone"
+										ng-pattern="/^[\]?[1]?[-\s\.]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/"
+										required class="form-control input-sm" ng-model="phone"
+										ng-required="true" placeholder="Phone" /> <span
+										style="color: red"
+										ng-show="myForm.phone.$touched && myForm.phone.$invalid">
+										<span ng-show="myForm.phone.$error.required">Phone is
+											Required</span> <span ng-show="myForm.phone.$error.pattern">Phone
+											Number Invalid</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="container-fluid">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-2 col-xs-4">
+									<label for="orderItem">Order:</label>
+								</div>
+								<div class="col-md-4 col-xs-6">
+									<select name="orderItem" ng-model="orderItem"
+										ng-required="true" id="orderItem">
+										<option value="">Please selct Your Order</option>
+										<option value="Ferrari">Ferrari</option>
+										<option value="Lamborghini">Lamborghini</option>
+										<option value="Maserati">Maserati</option>
+										<option value="Jaguar">Jaguar</option>
+										<option value="Porsche">Porsche</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6 col-xs-8">
+								<img class="img-responsive" 
+									ng-hide="!orderItem || !orderItem.length"
+									alt="please select a car for preview"
+									src='images/{{orderItem}}.png' />
+							</div>
+						</div>
+					</div>
+
+					<div class="container-fluid">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-2 col-xs-4">
+									<label for="order-location">Order Details:</label>
+								</div>
+
+								<div class="col-md-4 col-xs-8">
+									<div ng-repeat="order in orders">
+										<span ng-show="!order.orderItem || !order.length"> <!-- <input
+										id='input{{order.id}}' type="checkbox" ng-model="order.remove"> -->
+											<label style="width: 40%">{{order.orderItem}} : </label> <select
+											name="orderQuantity" ng-model="order.orderQuantity"
+											ng-required="true" id="orderQuantity">
+												<option ng-selected="1" value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+										</select> <a href="#" ng-click="removeItems(order.id)"
+											style="color: red"><span class="fa fa-times"></span></a>
+										</span>
+									</div>
+									<br /> <br />
+
+
+									<button ng-click="addItems()" ng-disabled="myForm.$invalid"
+										class="btn btn-sm btn-info">Add</button>
+
+								</div>
+							</div>
+						</div>
+					</div>
 
 
 
 
-				<input name="orders" type="textArea" ng-hide="true"
-					value='{{orders}}'>
+					<input name="orders" type="textArea" ng-hide="true"
+						value='{{orders}}'>
 
-				<div class="clear"></div>
-				<a href="#" ng-click="cancelOrder()" type="button"
-					class="btn btn-default">Cancel</a>
-				<button ng-click="submitOrder()" class="btn btn-primary"
-					ng-disabled="myForm.$invalid || !enableSend">Submit</button>
+					<div class="clear"></div>
+					<a href="#" ng-click="cancelOrder()" type="button"
+						class="btn btn-default">Cancel</a>
+					<button ng-click="submitOrder()" class="btn btn-primary"
+						ng-disabled="myForm.$invalid || !enableSend">Submit</button>
 
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 </body>
 
 </html>
