@@ -1,6 +1,6 @@
 # OnlineOrderManagement
 
-### This is a simple page Online Order Management System designed using AngularJS.
+### This is a simple single page Online Order Management System designed using AngularJS.
 
 
 * This application let's the user choose the desired car using the drop down menu. 
